@@ -15,7 +15,7 @@ class TwitterApi
     url = "https://api.twitter.com/oauth2/token"
     body = "grant_type=client_credentials"
     headers = set_headers(credentials)
-    get_bearer(body, headers)
+    get_bearer(url, body, headers)
   end
 
   def set_auth_credentials
@@ -29,7 +29,7 @@ class TwitterApi
     }    
   end
   
-  def get_bearer(body, headers)
+  def get_bearer(url, body, headers)
     r = HTTParty.post(url, body: body, headers: headers)
     bearer_token = JSON.parse(r.body)['access_token']
   end
